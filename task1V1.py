@@ -136,6 +136,39 @@ for i in range(len(adjacencyCart)):
 for i in range(len(edgesCart)):
     print(edgesCart[i])
 
+##########################################################################
+############################# Carls Algorithm ############################
+##########################################################################
+
+'''
+start: any vertex
+steps: travel unvisited edges until back to start (one cycle)
+check: unvisited edges?
+    yea: take vertex from path that has unvisited edges, then repeat from steps
+    nay: merge all the cycles that we have, then end algorithm
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
