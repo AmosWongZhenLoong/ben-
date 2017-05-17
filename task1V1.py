@@ -140,6 +140,18 @@ for i in range(len(edgesCart)):
 ############################# Carls Algorithm ############################
 ##########################################################################
 
+def noMorePaths(edgesCart):
+    '''
+    checks if edgesCart is empty or not
+    this is to determine whether to continue searching for cycles or not
+    arg edgesCart: the array that stores edges that have yet to be visited
+    return: True if the array is empty, False if the array is not empty
+    '''
+    if len(edgesCart) == 0:
+        return True
+    else:
+        return False
+
 '''
 start: any vertex
 steps: travel unvisited edges until back to start (one cycle)
@@ -147,6 +159,9 @@ check: unvisited edges?
     yea: take vertex from path that has unvisited edges, then repeat from steps
     nay: merge all the cycles that we have, then end algorithm
 '''
+
+location = 0        # current location in the graph
+cycles = []         # completed cycles store here, merge at the end
 
 
 
