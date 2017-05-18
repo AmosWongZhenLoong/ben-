@@ -101,6 +101,7 @@ for i in range(len(database)):
     temp = []
 
 print (database)
+print('\n')
 
 # make an adjacency list
 # note: directed graph
@@ -137,31 +138,78 @@ check: unvisited edges?
 '''
 
 nextLocation = 0        # current location in the graph
-cycles = []         # completed cycles store here, merge at the end
+cycles = []             # completed cycles store here, merge at the end
 currentPath = []
-currentPath.append(nextLocation)
+
+emptyCart = False
+branchFound = False
 
 while True:
-    location = nextLocation
-    nextLocation = adjacencyCart[location][0]
     currentPath.append(nextLocation)
-    del adjacencyCart[location][0]
-    if currentPath[0] == currentPath[-1]:
+    while True:
+        location = nextLocation
+        nextLocation = adjacencyCart[location][0]
+        currentPath.append(nextLocation)
+        del adjacencyCart[location][0]
+        if currentPath[0] == currentPath[-1] and len(currentPath) > 1:
+            break
+
+    print(currentPath)
+    print(adjacencyCart)
+    # finding the next branch to continue the search
+    for i in range(len(adjacencyCart)):
+        if len(adjacencyCart[i]) != 0:
+            nextLocation = i
+            branchFound = True
+            break
+
+    cycles.append(currentPath)
+
+    # if adjacency list is empty, stop the loop
+    if branchFound == False:
         break
+    
+    currentPath = []
+    branchFound = False
+    
+    print (nextLocation)
 
-# finding the next branch to continue the search
-for i in range(len(adjacencyCart)):
-    if len(adjacencyCart[i]) != 0:
-        nextLocation = i
-        break
+print (cycles)
 
-print (nextLocation)
+#############################################################################
+###################### Combine all the cycles into one ######################
+#############################################################################
 
+finalPath = []
 
+# first list goes straight into finalPath
+for i in range(len(cycles[0])):
+    finalPath.append(cycles[0][i])
 
+print(finalPath)
 
+# the rest gets inserted into respective positions
+for i in range(1, len(cycles)):
+    theItem = cycles[i][0]
+    for j in range(len(finalPath)):
+        if finalPath[j] == theItem:
+            for k in range(1, len(cycles[i])):
+                finalPath.insert(j+k, cycles[i][k])
+            break
+    
 
+print(finalPath)
 
+# change to letters
+# first vertex takes all letters
+# subsequent vertexes takes only the last letter
+finalString = ''
+finalString = finalString + (database[finalPath[0]][1])
+
+for i in range(1, len(finalPath)):
+    finalString = finalString + database[finalPath[i]][1][-1]
+
+print (finalString)
 
 
 
